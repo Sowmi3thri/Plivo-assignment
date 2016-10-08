@@ -29,6 +29,14 @@ import java.util.Set;
  */
 public class HttpUtil {
    static PlivoAuthenticator plivoAuthenticator = PlivoAuthenticator.getInstance();
+
+    /**
+     * Helper method to read line by line from httpresponse into a string
+     * @param httpResponse
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static String getStringResponseContent(HttpResponse httpResponse) throws URISyntaxException, IOException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
         StringBuffer result = new StringBuffer();
@@ -39,10 +47,23 @@ public class HttpUtil {
         return result.toString();
     }
 
+    /**
+     * Method to return the status code of a httpresponse
+     * @param httpResponse
+     * @return
+     */
     public static int getResponseCode(HttpResponse httpResponse) {
         return httpResponse.getStatusLine().getStatusCode();
     }
 
+    /**
+     * GET request
+     * @param url
+     * @param parameters
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static HttpResponse makeGetRequest(String url, Map<String,String> parameters) throws URISyntaxException, IOException {
         CredentialsProvider provider = new BasicCredentialsProvider();
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(plivoAuthenticator.getAuth_id(),plivoAuthenticator.getAuth_token());
@@ -57,6 +78,15 @@ public class HttpUtil {
         HttpResponse response = client.execute(request);
         return response;
     }
+
+    /**
+     * POST request
+     * @param url
+     * @param parameters
+     * @return
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static HttpResponse makePostRequest(String url, Map<String,String> parameters) throws URISyntaxException, IOException {
         CredentialsProvider provider = new BasicCredentialsProvider();
         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(plivoAuthenticator.getAuth_id(),plivoAuthenticator.getAuth_token());

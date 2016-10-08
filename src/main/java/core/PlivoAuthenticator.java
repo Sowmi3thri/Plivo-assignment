@@ -18,10 +18,23 @@ public class PlivoAuthenticator {
     @Getter private String auth_id;
     @Getter private String auth_token;
 
+    /**
+     * Private constructor for the singleton class
+     * This takes care of one time setting of auth for the entire run of the program
+     * @param auth_id
+     * @param auth_token
+     */
     private PlivoAuthenticator(String auth_id,String auth_token){
         this.auth_id = auth_id;
         this.auth_token = auth_token;
     }
+
+    /**
+     * Method to get the instance of the singleton class
+     * @param auth_id
+     * @param auth_token
+     * @return
+     */
     public static PlivoAuthenticator getInstance(String auth_id,String auth_token) {
         if(null == instance) {
             instance = new PlivoAuthenticator(auth_id,auth_token);
@@ -29,11 +42,22 @@ public class PlivoAuthenticator {
         return instance;
     }
 
+    /**
+     * Method to get the instance of the singleton class
+     * @return
+     */
     public static PlivoAuthenticator getInstance() {
         return instance;
     }
 
 
+    /**
+     * Method to check whether the user is authenticated to perform operations with Plivo
+     * Method checks for 200/202 response code for the account API
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public boolean isAuthenticUser() throws IOException, URISyntaxException {
         AccountApi accountApi = new AccountApi();
         String url = accountApi.completeUrl(base_url,auth_id);

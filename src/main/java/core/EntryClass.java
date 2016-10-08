@@ -11,6 +11,14 @@ import java.util.Scanner;
 public class EntryClass {
 
 
+    /**
+     * This is the entry method to the complete scenario flow
+     * args[0] = auth_id
+     * args[1] = auth_token
+     * @param args
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public static void main(String[] args) throws IOException, URISyntaxException {
         Orchestrator orchestrator = new Orchestrator();
         Scanner sc = new Scanner(System.in);
@@ -49,8 +57,8 @@ public class EntryClass {
 
 
         for(String phone_number : phone_numbers) {
-            //System.out.println("Buying number : " + phone_number);
-           // orchestrator.buyNumber(phone_number);
+            System.out.println("Buying number : " + phone_number);
+            orchestrator.buyNumber(phone_number);
 
             System.out.println("Enter destination phone number");
             String dest_ph = sc.next();

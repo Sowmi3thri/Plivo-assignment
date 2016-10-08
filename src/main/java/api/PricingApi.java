@@ -16,6 +16,12 @@ public class PricingApi extends ApiBase{
     public String base_url ="https://api.plivo.com/v1/Account/%s/Pricing/";
     public RequestType request_type = RequestType.GET;
 
+    /**
+     * Method to validate the request parameters
+     * For this scenario, country_iso is mandatory
+     * @param pricingRequest
+     * @return
+     */
     public boolean validateParams(PricingRequest pricingRequest) {
         if(pricingRequest!=null &&pricingRequest.getCountry_iso()!=null) {
             return true;
@@ -23,6 +29,12 @@ public class PricingApi extends ApiBase{
         return false;
     }
 
+    /**
+     * Helper method to convert pojo of request params into a map
+     * A map of request params would be useful in creating http get/post request
+     * @param pricingRequest
+     * @return
+     */
     public Map<String,String> constructRequestParams(PricingRequest pricingRequest) {
         if(!validateParams(pricingRequest)) {
             throw new RuntimeException("Parameters are not valid");
@@ -32,6 +44,13 @@ public class PricingApi extends ApiBase{
         return requestParams;
     }
 
+    /**
+     * Method that processes the response given by pricing API
+     * For this scenario, we need to extract out the 'rate' field from the response
+     * @param jsonResponse
+     * @return
+     * @throws IOException
+     */
     public float processResponse(String jsonResponse) throws IOException {
         PricingResponse pricingResponse = getPojo(jsonResponse,PricingResponse.class);
         Message message = pricingResponse.getMessage();

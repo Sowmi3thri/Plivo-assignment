@@ -28,6 +28,16 @@ public class Orchestrator {
     HttpResponse http_response;
     String string_response;
 
+    /**
+     * This method is to hit the search API with the given country_iso and pattern
+     * and return two matches if they exist
+     * otherwise, the program quits
+     * @param country_iso
+     * @param pattern
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public List<String> searchNumber(String country_iso,String pattern) throws IOException, URISyntaxException {
         PhoneNumberApi phoneNumberApi = new PhoneNumberApi();
         api_url = phoneNumberApi.completeUrl(phoneNumberApi.base_url);
@@ -46,6 +56,12 @@ public class Orchestrator {
         return phoneNumberApi.processResponse(string_response);
     }
 
+    /**
+     * This method is to hit the buying API with the given phone number
+     * @param phoneNumber
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void buyNumber(String phoneNumber) throws IOException, URISyntaxException {
         BuyingApi buyingApi = new BuyingApi();
         api_url = buyingApi.completeUrl(buyingApi.base_url,phoneNumber);
@@ -66,6 +82,16 @@ public class Orchestrator {
         }
     }
 
+    /**
+     * This method is to hit the message API and send a message from one number to another
+     * The method returns the uuid of the message
+     * @param src
+     * @param dst
+     * @param text
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public String sendMessage(String src, String dst, String text) throws IOException, URISyntaxException {
         MessageApi messageApi = new MessageApi();
         MessageRequest messageRequest = new MessageRequest();
@@ -86,6 +112,12 @@ public class Orchestrator {
         return uuid.get(0);
     }
 
+    /**
+     * This method is to hit the details API and display the message details for a given uuid
+     * @param uuid
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void printMessageDetails(String uuid) throws IOException, URISyntaxException {
         DetailsApi detailsApi = new DetailsApi();
         DetailsRequest detailsRequest = new DetailsRequest();
@@ -102,6 +134,13 @@ public class Orchestrator {
         System.out.println("Message details : " + string_response);
     }
 
+    /**
+     * This method is to extract the message outbound rate from the message detail for a given uuid
+     * @param uuid
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public float getMessageRate(String uuid) throws IOException, URISyntaxException {
         DetailsApi detailsApi = new DetailsApi();
         DetailsRequest detailsRequest = new DetailsRequest();
@@ -119,6 +158,13 @@ public class Orchestrator {
 
     }
 
+    /**
+     * This method id to get the pricing information for the given country
+     * @param country_iso
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public float getPricing(String country_iso) throws IOException, URISyntaxException {
         PricingApi pricingApi = new PricingApi();
         PricingRequest pricingRequest = new PricingRequest();
@@ -137,6 +183,12 @@ public class Orchestrator {
 
     }
 
+    /**
+     * This method is to extract the cash credit from account information
+     * @return
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public float getCashCredit() throws IOException, URISyntaxException {
         AccountApi accountApi = new AccountApi();
         AccountRequest accountRequest = new AccountRequest();
