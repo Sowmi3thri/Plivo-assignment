@@ -25,7 +25,7 @@ public class PhoneNumberApi extends ApiBase  {
      * @param phoneNumberRequest
      * @return
      */
-    public boolean validateParams(PhoneNumberRequest phoneNumberRequest) {
+    private boolean validateParams(PhoneNumberRequest phoneNumberRequest) {
         if(phoneNumberRequest!=null &&phoneNumberRequest.getCountry_iso()!=null && phoneNumberRequest.getPattern()!=null) {
             return true;
         }
@@ -39,7 +39,7 @@ public class PhoneNumberApi extends ApiBase  {
      * @param phoneNumberResponse
      * @return
      */
-    public boolean validateResponse(PhoneNumberResponse phoneNumberResponse) {
+    private boolean validateResponse(PhoneNumberResponse phoneNumberResponse) {
         List<Map<String,String>> objects = phoneNumberResponse.getObjects();
         if(objects.size()>=phone_number_count)
             return true;

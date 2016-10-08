@@ -22,7 +22,7 @@ public class PricingApi extends ApiBase{
      * @param pricingRequest
      * @return
      */
-    public boolean validateParams(PricingRequest pricingRequest) {
+    private boolean validateParams(PricingRequest pricingRequest) {
         if(pricingRequest!=null &&pricingRequest.getCountry_iso()!=null) {
             return true;
         }

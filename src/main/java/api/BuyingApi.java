@@ -22,7 +22,7 @@ public class BuyingApi extends ApiBase{
      * @param buyingRequest
      * @return
      */
-    public boolean validateParams(BuyingRequest buyingRequest) {
+    private boolean validateParams(BuyingRequest buyingRequest) {
         if(buyingRequest!=null)
             return true;
         return false;
@@ -48,7 +48,7 @@ public class BuyingApi extends ApiBase{
      * @param buyingResponse
      * @return
      */
-    public boolean validateResponse(BuyingResponse buyingResponse) {
+    private boolean validateResponse(BuyingResponse buyingResponse) {
         List<Map<String,String>> numbers = buyingResponse.getNumbers();
         if(numbers.size()<1) {
             return false;

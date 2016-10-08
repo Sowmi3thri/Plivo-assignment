@@ -22,7 +22,7 @@ public class MessageApi extends ApiBase {
      * @param messageRequest
      * @return
      */
-    public boolean validateParams(MessageRequest messageRequest) {
+    private boolean validateParams(MessageRequest messageRequest) {
         if(messageRequest!=null && messageRequest.getDst()!=null && messageRequest.getSrc()!=null && messageRequest.getText()!=null)
             return true;
         return false;
@@ -51,7 +51,7 @@ public class MessageApi extends ApiBase {
      * @param messageResponse
      * @return
      */
-    public boolean validateResponse(MessageResponse messageResponse) {
+    private boolean validateResponse(MessageResponse messageResponse) {
         String message = messageResponse.getMessage();
         if(message.equalsIgnoreCase("message(s) queued"))
             return true;
