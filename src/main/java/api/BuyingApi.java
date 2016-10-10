@@ -3,8 +3,12 @@ package api;
 import pojo.request.BuyingRequest;
 import pojo.response.BuyingResponse;
 import pojo.request.RequestType;
+import workflow.ApiUrlConstructor;
+import workflow.PathParams;
+import workflow.RequestParamConstructor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,5 +80,17 @@ public class BuyingApi extends ApiBase{
         return true;
 
     }
+
+    public PathParams pathParamsForBuying = () -> {
+       return new ArrayList<>();
+    };
+
+    public ApiUrlConstructor buyingApi = (args) -> {
+        return completeUrl(base_url,args);
+    };
+
+    public RequestParamConstructor buyingRequestParams = (jsonString) -> {
+        return new HashMap<>();
+    };
 
 }

@@ -1,10 +1,12 @@
 package api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import core.PlivoAuthenticator;
-import pojo.request.RequestType;
 import org.apache.http.HttpResponse;
+import pojo.request.RequestType;
 import util.HttpUtil;
+import workflow.ResponseConverter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -89,6 +91,10 @@ public abstract class ApiBase {
             return true;
         return false;
     }
+
+    ResponseConverter fieldRetriever = (json, jsonpath) -> {
+        return JsonPath.read(json, jsonpath);
+    };
 
 
 }

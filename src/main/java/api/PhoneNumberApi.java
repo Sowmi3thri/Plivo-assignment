@@ -3,6 +3,9 @@ package api;
 import pojo.request.PhoneNumberRequest;
 import pojo.response.PhoneNumberResponse;
 import pojo.request.RequestType;
+import workflow.ApiUrlConstructor;
+import workflow.PathParams;
+import workflow.RequestParamConstructor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,7 +91,17 @@ public class PhoneNumberApi extends ApiBase  {
 
     }
 
+     public  PathParams pathParamsForSearch = () -> {
+        return new ArrayList<>();
+    };
 
+    public ApiUrlConstructor searchApi = (args) -> {
+        return completeUrl(base_url);
+    };
+
+    public RequestParamConstructor searchRequestParamConstructor = (jsonString) -> {
+        return new HashMap<>();
+    };
 
 
 

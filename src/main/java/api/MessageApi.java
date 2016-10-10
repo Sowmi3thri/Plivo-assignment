@@ -3,8 +3,12 @@ package api;
 import pojo.request.MessageRequest;
 import pojo.response.MessageResponse;
 import pojo.request.RequestType;
+import workflow.ApiUrlConstructor;
+import workflow.PathParams;
+import workflow.RequestParamConstructor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,5 +79,17 @@ public class MessageApi extends ApiBase {
         return messageResponse.getMessage_uuid();
 
     }
+
+    public PathParams pathParamsForMessageSend = () -> {
+        return new ArrayList<>();
+    };
+
+    public ApiUrlConstructor messageApiUrl = (args) -> {
+        return completeUrl(base_url,args);
+    };
+
+    public RequestParamConstructor messageRequestParameter = (jsonString) -> {
+        return new HashMap<>();
+    };
 
 }
